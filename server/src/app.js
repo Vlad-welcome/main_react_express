@@ -1,25 +1,29 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import cors from 'cors';
-import { errorHandler } from './middlewares/errorHandler.js';
+import "dotenv/config";
 
-import initDB from './config/initDB.js';
+import express from "express";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import cors from "cors";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
-import authRouter from './routes/authRouter.js';
+import initDB from "./config/initDB.js";
+
+import authRouter from "./routes/authRouter.js";
+import fruitRouter from "./routes/fruitRouter.js";
 
 const app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use('./uploads', express.static('uploads'));
+app.use("./uploads", express.static("uploads"));
 app.use(cors());
 
 app.use(errorHandler);
 
-app.use('/auth', authRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/fruit", fruitRouter);
 
 await initDB();
 

@@ -1,33 +1,40 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { First } from "./pages/index.js";
-import { Header } from './components';
+import { Register, Login, Main, Layout, ProtectedLayout } from "./pages/index.js";
+import { Header, Footer } from "./components";
 
-import { fetchAuthMe, selectIsAuth } from './redux/slices/auth';
+import { fetchAuthMe, selectIsAuth } from "./redux/slices/auth";
 
-export default function App()
-{
+export default function App() {
   //deploy Vercel
 
   const isAuth = useSelector(selectIsAuth);
 
   const dispatch = useDispatch();
-  React.useEffect(() =>
-  {
-    if (isAuth)
-    {
+  React.useEffect(() => {
+    if (isAuth) {
       dispatch(fetchAuthMe());
     }
   }, [dispatch]);
 
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/" element={<First />}></Route>
+        {/* Публичные */}
+        <Route element={<Layout header={Header} footer={Footer} />}>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+
+        {/* Защищённые */}
+        <Route element={<ProtectedLayout />}>
+          <Route element={<Layout header={Header} footer={Footer} />}>
+            <Route path="/" element={<Main />} />
+          </Route>
+        </Route>
       </Routes>
     </>
   );
