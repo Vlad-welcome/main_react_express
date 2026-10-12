@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import axios from "../../axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { fetchLogin, selectIsAuth } from "../../redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -30,7 +30,6 @@ export const Login = () => {
       const serverErrors = error.response?.data?.errors;
 
       if (serverErrors) {
-        // Сервер вернул ошибки по полям — показываем их под нужными инпутами
         Object.entries(serverErrors).forEach(([field, message]) => {
           setError(field, { type: "server", message });
         });

@@ -27,14 +27,14 @@ export const Header = () => {
 
         <div className="d-flex">
           {isAuth ? (
-            <>
-              <Link to="/add-post">
-                <Button variant="primary">Написать статью</Button>
+            <div className="d-flex gap-2">
+              <Link to="/allFruit">
+                <Button variant="primary">Все фрукты</Button>
               </Link>
-              <Button onClick={onClickLogout} variant="primary" className="primary">
+              <Button onClick={onClickLogout} variant="outline-primary" className="primary">
                 Выйти
               </Button>
-            </>
+            </div>
           ) : (
             <div className="d-flex gap-2">
               <Link to="/login">

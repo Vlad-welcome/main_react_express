@@ -1,8 +1,23 @@
 import fruitService from "../services/fruitService.js";
 
+export const getAllFruit = async (req, res) => {
+  try {
+    const fruits = await fruitService.getAllFruit();
+
+    return res.status(200).json({
+      success: true,
+      fruits,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+    });
+  }
+};
+
 export const getFruits = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.UserId;
     const fruits = await fruitService.getAll(userId);
 
     return res.status(200).json({
@@ -18,7 +33,7 @@ export const getFruits = async (req, res) => {
 
 export const addFruit = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.UserId;
     const { name } = req.body;
     const fruit = await fruitService.add({ userId, name });
 

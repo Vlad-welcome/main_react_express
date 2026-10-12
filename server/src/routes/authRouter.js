@@ -18,6 +18,5 @@ router.post("/login", AuthValidation.loginValidation, CheckValidationErr, AuthCo
 router.get("/me", CheckAuth, AuthController.me);
 
 router.post("/upload", CheckAuth, upload.single("image"), AuthController.uploadImage);
-router.get("/check", AuthController.check);
 
 export default router;

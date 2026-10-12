@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "../../axios";
 import { MainModal } from "../../components/MainModal/MainModal";
 import { Button, Table, Container, Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAuthMe } from "../../redux/slices/auth";
 
 export const Main = () => {
   const [fruits, setFruits] = useState([]);

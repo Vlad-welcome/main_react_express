@@ -24,6 +24,7 @@ export const fetchRegister = createAsyncThunk("auth/fetchRegister", async (param
 const initialState = {
   items: null,
   loading: false,
+  me: null,
 };
 
 const slice = createSlice({
@@ -32,6 +33,7 @@ const slice = createSlice({
   reducers: {
     logout: (state) => {
       state.items = null;
+      state.me = null;
       localStorage.removeItem("token");
     },
   },
@@ -53,7 +55,7 @@ const slice = createSlice({
       })
       .addCase(fetchAuthMe.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload;
+        state.me = action.payload.user;
       })
       .addCase(fetchAuthMe.rejected, (state, action) => {
         state.loading = false;
@@ -74,7 +76,6 @@ const slice = createSlice({
 
 export const selectIsAuth = (state) =>
   Boolean(state.auth.data?.token) || Boolean(localStorage.getItem("token"));
-export const selectIsChecked = (state) => state.auth.isChecked;
 
 export const authReducer = slice.reducer;
 

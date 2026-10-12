@@ -27,13 +27,11 @@ export const Register = () => {
   const onSubmit = async (data) => {
     try {
       dispatch(fetchRegister(data));
-      console.log("Успех:", response.data);
       navigate("/login");
     } catch (error) {
       const serverErrors = error.response?.data?.errors;
 
       if (serverErrors) {
-        // Сервер вернул ошибки по полям — показываем их под нужными инпутами
         Object.entries(serverErrors).forEach(([field, message]) => {
           setError(field, { type: "server", message });
         });

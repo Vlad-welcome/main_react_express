@@ -7,6 +7,7 @@ import { Register, Login, Main, Layout, ProtectedLayout } from "./pages/index.js
 import { Header, Footer } from "./components";
 
 import { fetchAuthMe, selectIsAuth } from "./redux/slices/auth";
+import { AllFruit } from "./pages/AllFruit/AllFruit.jsx";
 
 export default function App() {
   //deploy Vercel
@@ -33,6 +34,7 @@ export default function App() {
         <Route element={<ProtectedLayout />}>
           <Route element={<Layout header={Header} footer={Footer} />}>
             <Route path="/" element={<Main />} />
+            <Route path="/allFruit" element={<AllFruit />} />
           </Route>
         </Route>
       </Routes>

@@ -1,12 +1,6 @@
 import userService from "../services/userService.js";
 import JwtService from "../services/jwtService.js";
 
-export const check = async (req, res) => {
-  return res.status(201).json({
-    success: true,
-  });
-};
-
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;

@@ -2,6 +2,13 @@ import { where } from "sequelize";
 import Fruit from "./../models/fruitModel.js";
 
 class FruitService {
+  async getAllFruit() {
+    return await Fruit.findAll({
+      limit: 30,
+      offset: 0,
+    });
+  }
+
   async getAll(userId) {
     return await Fruit.findAll({
       where: { userId },
@@ -12,7 +19,7 @@ class FruitService {
 
   async add(fruit) {
     const { userId, name } = fruit;
-    const res = await Fruit.create({ name: name }, { userId: userId });
+    const res = await Fruit.create({ name, userId });
     return res;
   }
 
